@@ -1,0 +1,19 @@
+use_bpm 140
+
+live_loop :acid do
+  with_fx :reverb do |r|
+    use_synth :tb303
+    use_random_seed 3426
+    16.times do
+      control r, mix: rrand(0.1, 0.2), room: 0.8
+      ##| play (ring 60, 42, 42, nil, nil, 64, 62).choose,
+      play rrand_i(40, 78),
+        cutoff: rrand_i(40, 120), res: 0.82,
+        release: 0.2, amp: 0.9,
+        on: (bools 1, 0 ,0, 1, 1, 1, 1, 0).tick,
+        wave: choose([0,1,2])
+      
+      sleep 0.25
+    end
+  end
+end
